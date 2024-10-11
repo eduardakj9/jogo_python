@@ -1,14 +1,19 @@
 # Example file showing a basic pygame "game loop"
-import pygame
+import pygame #importa a bibliotea pygame para o script
 
-# pygame setup
-pygame.init()
-screen = pygame.display.set_mode((500,500))
-pygame.display.set_caption ('jogo da velha')
-clock = pygame.time.Clock()
-running = True
-cor_fundo = 1 #amarelo
-cor_fundo = 2 #azul
+# pygame configuraçao
+pygame.init() #inicializaçao do pygame
+screen = pygame.display.set_mode((500,500)) #definiçao do tamanho de tela 
+pygame.display.set_caption ('jogo da velha') #nome da janela do jogo
+clock = pygame.time.Clock()#biblioteca de tempo
+
+fonte_quadrinhos = pygame.font,Sysfont('comic sans ms,30') #importar fonte
+running = True #variavel controle do status do jogo
+
+personagem_x = fonte_quadrinhos.render('X', true, "red")
+personagem_y = fonte_quadrinhos.render ('O' , true, "red ")
+cor_fundo = 1 #azul
+cor_fundo = 2 #vermelho
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
@@ -17,22 +22,23 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
            print('clicou')
-           cor_fundo = cor_fundo + 1
-        # cor_fundo = 2 #vermelho
+           cor_fundo = = cor_fundo + 1
+        if (cor_fundo > 3):
+            cor_fundo = 1
 
-    # fill the screen with a color to wipe away anything from last frame
-
-    # RENDER YOUR GAME HERE
+   
     if cor_fundo == 1:
-         screen.fill ('blue')  
+         screen.fill ('black')  
+         screen.blit ('personagem_x,(250,250))
     elif cor_fundo ==2:
-         screen.fill ('red')
+        screen.fill (black)
+        screen.blit (personagem_y,(250,250))
     else: 
          screen.fill('purple')
 
-    # flip() the display to put your work on screen
-    pygame.display.flip()
 
-    clock.tick(60)  # limits FPS to 60
+#flip() o display para atualizar a pagina
+pygame.disolay.flip()
+clock.tick(60)  # limita o fps para 60
 
-pygame.quit()
+pygame>quit()
