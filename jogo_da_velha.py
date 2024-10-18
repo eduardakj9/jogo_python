@@ -3,17 +3,17 @@ import pygame #importa a bibliotea pygame para o script
 
 # pygame configuraçao
 pygame.init() #inicializaçao do pygame
-screen = pygame.display.set_mode((500,500)) #definiçao do tamanho de tela 
+screen = pygame.display.set_mode((600,600)) #definiçao do tamanho de tela 
 pygame.display.set_caption ('jogo da velha') #nome da janela do jogo
 clock = pygame.time.Clock()#biblioteca de tempo
 
-fonte_quadrinhos = pygame.font,Sysfont('comic sans ms,30') #importar fonte
+fonte_quadrinhos = pygame.font.SysFont('comic sans ms',100) #importar fonte
 running = True #variavel controle do status do jogo
 
-personagem_x = fonte_quadrinhos.render('X', true, "red")
-personagem_y = fonte_quadrinhos.render ('O' , true, "red ")
+personagem_x = fonte_quadrinhos.render('X', True, "red")
+personagem_y = fonte_quadrinhos.render ('O' , True, "red ")
 cor_fundo = 1 #azul
-cor_fundo = 2 #vermelho
+
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
@@ -22,23 +22,27 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
            print('clicou')
-           cor_fundo = = cor_fundo + 1
+           cor_fundo = cor_fundo + 1
         if (cor_fundo > 3):
             cor_fundo = 1
 
+    #desenha tabuleiro
+    #                                 origem   destino
+    #                                 (x . y)   (x.y)
+    pygame.draw.line(screen,'white',(200,0), (200,600),  10)
+    pygame.draw.line(screen,'white',(400, 0),(400,600), 10)
+    pygame.draw.line(screen,'white',(0,200), (600,200), 10)
+    pygame.draw.line(screen,'white',(0,400), (600,400), 10)
    
-    if cor_fundo == 1:
-         screen.fill ('black')  
-         screen.blit ('personagem_x,(250,250))
-    elif cor_fundo ==2:
-        screen.fill (black)
-        screen.blit (personagem_y,(250,250))
-    else: 
-         screen.fill('purple')
+    #                           x  y
+    screen.blit(personagem_x,(60,30)) #primeiro
+    screen.blit(personagem_y,(260,30)) #segundo
+    screen.blit(personagem_y,(460,30)) #terceiro
+         
 
+    #flip() o display para atualizar a pagina
+    pygame.display.flip()
 
-#flip() o display para atualizar a pagina
-pygame.disolay.flip()
-clock.tick(60)  # limita o fps para 60
+    clock.tick(60)  # limita o fps para 60
 
-pygame>quit()
+pygame.quit()
