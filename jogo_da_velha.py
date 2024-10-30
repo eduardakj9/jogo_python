@@ -19,9 +19,48 @@ personagem_o = fonte_quadrinhos.render('O', True, 'red')
 jogador_atual = personagem_x #inicializa o jogo com o X
 
 rodadas = 0
+tabuleiro_desenhado = False
 
 coordenada_x = 0
 coordenada_y = 0
+def desenha_tabuleiro(espessura,red):
+    #Desenha tabuleiro
+    #                                  origem      destino    
+    #                                ( x , y)   ( x , y ) 
+    pygame.draw.line(screen, "red",(200, 0), (200, 600), espessura)
+    pygame.draw.line(screen, "red",(400, 0), (400, 600), espessura)
+    pygame.draw.line(screen, "red",(0, 200), (600, 200), espessura)
+    pygame.draw.line(screen, "red",(0, 400), (600, 400), espessura)
+
+
+def faz_jogada():
+
+    if coordenada_x > 0 and coordenada_x < 200  and coordenada_y < 200:
+        screen.blit(jogador_atual,(60,30))  #primeiro
+
+    elif coordenada_x >= 200 and coordenada_x < 400 and coordenada_y < 200:
+        screen.blit(jogador_atual,(260,30)) #segundo
+    
+    elif coordenada_x >= 400 and coordenada_y < 200:
+        screen.blit(jogador_atual,(460,30)) #terceiro
+    
+    elif coordenada_x < 200 and coordenada_y >= 200 and coordenada_y < 400:
+        screen.blit(jogador_atual,(60,230))  #quarto
+    
+    elif coordenada_x >= 200 and coordenada_x < 400 and coordenada_y >= 200  and coordenada_y < 400:
+        screen.blit(jogador_atual,(260,230)) #quinto
+
+    elif coordenada_x >= 400 and coordenada_y >= 200 and coordenada_y < 400:
+        screen.blit(jogador_atual,(460,230)) #sexto
+    
+    elif coordenada_x < 200 and coordenada_y >= 400:
+        screen.blit(jogador_atual,(60,430))  #setimo
+    
+    elif coordenada_x >= 200 and coordenada_x < 400 and  coordenada_y >= 400:
+        screen.blit(jogador_atual,(260,430)) #oitavo
+    
+    elif coordenada_x >= 400 and coordenada_y >= 400:
+        screen.blit(jogador_atual,(460,430)) #nono
 
 while running:
     # controle de enventos no jgo
@@ -39,50 +78,25 @@ while running:
             coordenada_y = click_pos[1]
             rodadas = rodadas + 1
             if(rodadas >= 10):
-                screen.fill('black') 
-                rodadas != 1:
+                screen.fill('black')
+                rodadas = 0                
+                coordenada_x = 0
+                coordenada_y = 0 
+                tabuleiro_desenhado = False
             if jogador_atual == personagem_x:
-                jogador_atual = personagem_o
+                    jogador_atual = personagem_o
             else:
-                jogador_atual = personagem_x
-            else: 
-                jogador_atual = personagem_x
+                    jogador_atual = personagem_x
     
-    #Desenha tabuleiro
-    #                                  origem      destino    
-    #                                ( x , y)   ( x , y ) 
-    pygame.draw.line(screen, 'white',(200, 0), (200, 600), 10)
-    pygame.draw.line(screen, 'white',(400, 0), (400, 600), 10)
-    pygame.draw.line(screen, 'white',(0, 200), (600, 200), 10)
-    pygame.draw.line(screen, 'white',(0, 400), (600, 400), 10)
+    faz_jogada()
+    if tabuleiro_desenhado == False:
+       desenha_tabuleiro(50,"red") 
+       tabuleiro_desenhado = True
 
-    if coordenada_x > 0 and coordenada_x < 200  and coordenada_y < 200:
-        screen.blit(jogador_atual,(60,30))  #primeiro
+   
 
-    elif coordenada_x >= 200 and coordenada_x < 400 and coordenada_y < 200:
-        screen.blit(jogador_atual,(260,30)) #segundo
-    
-    elif coordenada_x >= 400 and coordenada_y < 200:
-        screen.blit(jogador_atual,(460,30)) #terceiro
-    
-    elif coordenada_x < 200 and coordenada_y >= 200 and coordenada_y < 400:
-        screen.blit(jogador_atual,(60,230))  #quarto
-    
-    elif coordenada_x >= 200 and coordenada_x < 400 and coordenada_y >= 200  and coordenada_y < 400:
-        screen.blit(jogador_atual,(260,230)) #quinto
 
-    
-    elif coordenada_x >= 400 and coordenada_y >= 200 and coordenada_y < 400:
-        screen.blit(jogador_atual,(460,230)) #sexto
-    
-    elif coordenada_x < 200 and coordenada_y >= 400:
-        screen.blit(jogador_atual,(60,430))  #setimo
-    
-    elif coordenada_x >= 200 and coordenada_x < 400 and  coordenada_y >= 400:
-        screen.blit(jogador_atual,(260,430)) #oitavo
-    
-    elif coordenada_x >= 400 and coordenada_y >= 400:
-        screen.blit(jogador_atual,(460,430)) #nono
+   
 
         
 
