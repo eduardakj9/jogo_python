@@ -13,8 +13,8 @@ clock = pygame.time.Clock() #biblioteca de tempo
 fonte_quadrinhos = pygame.font.SysFont('Comic Sans Ms', 100, True, True) #importar fonte
 running = True #variável de controle do status do jogo
 
-personagem_x = fonte_quadrinhos.render('X', True, 'red')
-personagem_o = fonte_quadrinhos.render('O', True, 'red')
+personagem_x = fonte_quadrinhos.render('X', True, 'white')
+personagem_o = fonte_quadrinhos.render('O', True, 'blue')
 
 jogador_atual = personagem_x #inicializa o jogo com o X
 
@@ -44,8 +44,7 @@ def desenha_tabuleiro(espessura,red):
     pygame.draw.line(screen, "red",(0, 400), (600, 400), espessura)
 
 
-def faz_jogada():
-
+def faz_jogada(): 
     global q1 , q2 , q3 , q4 , q5 , q6 ,q7 , q8, q9
     status = True
     if q1 == '' and coordenada_x > 0 and coordenada_x < 200  and coordenada_y < 200:
@@ -80,6 +79,28 @@ def faz_jogada():
 
     return status
 
+def check_vencedor ():
+    status = False
+    if q1 == q2 == q3 != '':
+        status = True
+        pygame.draw.line(screen, 'orange' ,(50, 100) ,(550, 100), 10)
+    elif q4 == q5 == q6 != '':
+        status = True
+    elif q1 == q4 == q7 != '':
+        status = True
+    elif q2 == q4 == q8 != '':
+        status = True 
+    elif q3 == q6 == q9 != '':
+        status = True
+    elif q1 == q5 == q6 != '':
+        status = True
+    elif q4 == q5 == q9 != '':
+        status = True
+    elif q3 == q5 == q7 != '':
+        status = True
+    return status
+
+
 while running:
     # controle de enventos no jgo
     for event in pygame.event.get():
@@ -99,15 +120,18 @@ while running:
                 rodadas = 0                
                 coordenada_x = 0
                 coordenada_y = 0 
+                jogador_atual = personagem_x
                 tabuleiro_desenhado = False
+                break
             if (faz_jogada()):
-               rodadas = rodadas + 1
-            if jogador_atual == personagem_x:
+                rodadas = rodadas + 1
+                if jogador_atual == personagem_x:
                     jogador_atual = personagem_o
-            else:
+                else:
                     jogador_atual = personagem_x
-    
-    faz_jogada()
+                    check_vencedor()
+                if (check_vencedor()):
+                    rodadas = 9 
 
 
 
@@ -128,10 +152,6 @@ while running:
 
    
 
-
-   
-
-        
 
 
     # flip() o display para atualizar a página
