@@ -83,20 +83,27 @@ def check_vencedor ():
     status = False
     if q1 == q2 == q3 != '':
         status = True
-        pygame.draw.line(screen, 'orange' ,(50, 100) ,(550, 100), 10)
+        pygame.draw.line(screen, 'orange' ,(50,100), (550,100), 10)
     elif q4 == q5 == q6 != '':
         status = True
+        pygame.draw.line(screen, 'orange' ,(50,300), (550,300), 10)
     elif q1 == q4 == q7 != '':
+        pygame.draw.line(screen, 'orange' ,(50,500), (550,500), 10)
         status = True
     elif q2 == q4 == q8 != '':
+        pygame.draw.line(screen, 'orange' ,(100,50), (100,550), 10)
         status = True 
     elif q3 == q6 == q9 != '':
+        pygame.draw.line(screen, 'orange' ,(300,50), (300,550), 10)
         status = True
     elif q1 == q5 == q6 != '':
+        pygame.draw.line(screen, 'orange' ,(500,50), (500,550), 10)
         status = True
     elif q4 == q5 == q9 != '':
+        pygame.draw.line(screen, 'orange' ,(50,50) (550,550), 10)
         status = True
     elif q3 == q5 == q7 != '':
+        pygame.draw.line(screen, 'orange' ,(550,50), (50,550), 10)
         status = True
     return status
 
